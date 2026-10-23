@@ -271,34 +271,37 @@ a {
 .work-card .thumb {
   position: relative;
   aspect-ratio: 4 / 3;
-  overflow: hidden;
   border-radius: 16px;
   background: var(--card);
-  isolation: isolate;
-  /* Own compositing layer so the rounded clip holds while the image scales */
-  transform: translateZ(0);
   transition: box-shadow 0.6s var(--ease-out);
 }
 
-.work-card .thumb img {
+/* Rounded clip lives on its own layer: Safari drops overflow + radius
+   clipping when a child scales or a sibling uses backdrop-filter. */
+.work-card .media {
+  position: absolute;
+  inset: 0;
+  -webkit-clip-path: inset(0 round 16px);
+  clip-path: inset(0 round 16px);
+}
+
+.work-card .media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit;
   transition: transform 1.2s var(--ease-out), filter 0.6s var(--ease-out);
 }
 
 /* Cursor light, positioned by main.js through --mx and --my */
-.work-card .thumb::after {
+.work-card .media::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
     420px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.14),
     transparent 60%
   );
-  mix-blend-mode: soft-light;
   opacity: 0;
   transition: opacity 0.5s var(--ease-out);
   pointer-events: none;
@@ -308,7 +311,6 @@ a {
   position: absolute;
   left: 16px;
   bottom: 16px;
-  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -340,12 +342,12 @@ a {
     box-shadow: 0 24px 48px -28px rgba(20, 20, 20, 0.45);
   }
 
-  .work-card:hover .thumb img {
+  .work-card:hover .media img {
     transform: scale(1.05);
     filter: saturate(1.1);
   }
 
-  .work-card:hover .thumb::after,
+  .work-card:hover .media::after,
   .work-card:hover .pill {
     opacity: 1;
   }
@@ -362,7 +364,7 @@ a {
     color: var(--accent);
   }
 
-  .work-grid:hover .work-card:not(:hover) .thumb img {
+  .work-grid:hover .work-card:not(:hover) .media img {
     filter: saturate(0.6);
   }
 }
