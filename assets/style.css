@@ -5,8 +5,6 @@
   --line: #d9d6ce;
   --accent: #ff5a1f;
   --card: #e8e5de;
-  --guide: rgba(255, 90, 31, 0.07);
-  --guide-line: rgba(255, 90, 31, 0.45);
   --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --gutter: clamp(16px, 4vw, 56px);
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
@@ -20,7 +18,6 @@
     --muted: #9a9892;
     --line: #2a2926;
     --card: #1c1b19;
-    --guide: rgba(255, 90, 31, 0.09);
   }
 }
 
@@ -683,107 +680,52 @@ a {
   transform: none;
 }
 
-/* Page transition: the layout grid is switched on, the page is swapped
-   underneath it, then the grid is switched off again. */
+/* Page transitions: cross-document View Transitions. The old page sinks
+   and blurs away, the new one rises into focus, the header stays put and a
+   clicked project thumbnail grows into that project's cover. Browsers
+   without support simply navigate. */
 
-.guides {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  pointer-events: none;
-  visibility: hidden;
+@view-transition {
+  navigation: auto;
 }
 
-.guides-cols {
-  display: grid;
-  grid-template-columns: repeat(var(--cols, 12), 1fr);
-  gap: 24px;
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-old(root) {
+  animation: page-out 0.4s var(--ease) both;
+}
+
+::view-transition-new(root) {
+  animation: page-in 0.7s 0.1s var(--ease-out) both;
+}
+
+::view-transition-group(project-cover) {
+  animation-duration: 0.75s;
+  animation-timing-function: var(--ease);
+}
+
+::view-transition-old(project-cover),
+::view-transition-new(project-cover) {
   height: 100%;
-  max-width: 1600px;
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+  object-fit: cover;
+  animation-duration: 0.75s;
 }
 
-.guides-cols span {
-  background: var(--guide);
-  border-inline: 1px solid var(--guide-line);
-  transform: scaleY(0);
-  transform-origin: top;
-}
-
-.guides-label {
-  position: absolute;
-  top: 0;
-  left: var(--gutter);
-  padding: 4px 8px;
-  border-radius: 0 0 3px 3px;
-  background: var(--accent);
-  color: #fff;
-  font-family: var(--mono);
-  font-size: 12px;
-  opacity: 0;
-}
-
-.guides-bar {
-  position: absolute;
-  inset: 0 0 auto;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-}
-
-.guides.is-on,
-.guides.is-off {
-  visibility: visible;
-}
-
-.guides.is-on .guides-cols span {
-  transform: none;
-  transition: transform 0.5s var(--ease);
-  transition-delay: calc(var(--i) * 25ms);
-}
-
-.guides.is-on .guides-label {
-  opacity: 1;
-  transition: opacity 0.2s 0.2s;
-}
-
-.guides.is-on .guides-bar {
-  transform: none;
-  transition: transform 0.75s var(--ease);
-}
-
-.guides.is-off .guides-cols span {
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.55s var(--ease);
-  transition-delay: calc(var(--i) * 25ms);
-}
-
-.guides.is-off .guides-bar {
-  transform: scaleX(1);
-  transform-origin: right;
-  animation: bar-out 0.5s var(--ease) forwards;
-}
-
-@keyframes bar-out {
-  to { transform: scaleX(0); }
-}
-
-/* Page content fades under the grid while it is switched on. */
-@media (scripting: enabled) {
-  main,
-  .site-footer {
-    transition: opacity 0.35s var(--ease-out), translate 0.5s var(--ease-out);
-  }
-
-  html:not(.is-ready) main,
-  html:not(.is-ready) .site-footer,
-  html.is-leaving main,
-  html.is-leaving .site-footer {
+@keyframes page-out {
+  to {
     opacity: 0;
-    translate: 0 12px;
+    transform: scale(0.97);
+    filter: blur(8px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+    filter: blur(10px);
   }
 }
 
@@ -810,10 +752,6 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .guides-cols {
-    --cols: 4;
-    gap: 16px;
-  }
 }
 
 @media (max-width: 520px) {
@@ -832,6 +770,12 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {
