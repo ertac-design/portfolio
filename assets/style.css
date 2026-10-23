@@ -259,7 +259,8 @@ a {
   flex-wrap: wrap;
 }
 
-/* Work grid: hovering a project selects it like a frame on a canvas */
+/* Work grid: on hover the card softens its corners, the image eases in,
+   a light follows the cursor and a frosted pill rises from the bottom. */
 
 .work-grid {
   display: grid;
@@ -270,82 +271,97 @@ a {
 .work-card .thumb {
   position: relative;
   aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--card);
+  isolation: isolate;
+  transition: border-radius 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
 }
 
 .work-card .thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 4px;
-  background: var(--card);
+  transition: transform 1.2s var(--ease-out), filter 0.6s var(--ease-out);
 }
 
-.work-card .thumb::before,
+/* Cursor light, positioned by main.js through --mx and --my */
 .work-card .thumb::after {
   content: "";
   position: absolute;
-  pointer-events: none;
+  inset: 0;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.22),
+    transparent 60%
+  );
+  mix-blend-mode: soft-light;
   opacity: 0;
-  transition: opacity 0.25s var(--ease-out), inset 0.45s var(--ease-out);
+  transition: opacity 0.5s var(--ease-out);
+  pointer-events: none;
 }
 
-.work-card .thumb::before {
-  inset: 10px;
-  border: 1.5px solid var(--accent);
-}
-
-/* Corner handles: four squares drawn as background layers */
-.work-card .thumb::after {
-  inset: 6px;
-  --h: linear-gradient(var(--accent), var(--accent));
-  --w: linear-gradient(#fff, #fff);
-  background:
-    var(--w) 1.5px 1.5px / 6px 6px no-repeat,
-    var(--w) calc(100% - 1.5px) 1.5px / 6px 6px no-repeat,
-    var(--w) 1.5px calc(100% - 1.5px) / 6px 6px no-repeat,
-    var(--w) calc(100% - 1.5px) calc(100% - 1.5px) / 6px 6px no-repeat,
-    var(--h) 0 0 / 9px 9px no-repeat,
-    var(--h) 100% 0 / 9px 9px no-repeat,
-    var(--h) 0 100% / 9px 9px no-repeat,
-    var(--h) 100% 100% / 9px 9px no-repeat;
-}
-
-.work-card .size {
+.work-card .pill {
   position: absolute;
-  left: 50%;
-  top: calc(100% + 8px);
-  translate: -50% 4px;
-  padding: 2px 6px;
-  border-radius: 3px;
-  background: var(--accent);
+  left: 16px;
+  bottom: 16px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(20, 20, 20, 0.45);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
   color: #fff;
-  font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1.5;
-  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
   opacity: 0;
+  translate: 0 12px;
+  transition: opacity 0.4s var(--ease-out), translate 0.6s var(--ease-out);
   pointer-events: none;
-  transition: opacity 0.25s var(--ease-out), translate 0.45s var(--ease-out);
+}
+
+.work-card .pill span {
+  transition: translate 0.5s 0.1s var(--ease-out);
+  translate: -4px 0;
+}
+
+.work-meta .index {
+  transition: color 0.4s var(--ease-out);
 }
 
 @media (hover: hover) {
-  .work-card:hover .thumb::before {
-    inset: -5px;
+  .work-card:hover .thumb {
+    border-radius: 22px;
+    box-shadow: 0 24px 48px -28px rgba(20, 20, 20, 0.45);
+  }
+
+  .work-card:hover .thumb img {
+    transform: scale(1.05);
+    filter: saturate(1.1);
+  }
+
+  .work-card:hover .thumb::after,
+  .work-card:hover .pill {
     opacity: 1;
   }
 
-  .work-card:hover .thumb::after {
-    inset: -9px;
-    opacity: 1;
+  .work-card:hover .pill {
+    translate: 0 0;
   }
 
-  .work-card:hover .size {
-    translate: -50% 0;
-    opacity: 1;
+  .work-card:hover .pill span {
+    translate: 0 0;
   }
 
-  .work-card:hover .work-meta {
-    opacity: 0;
+  .work-card:hover .index {
+    color: var(--accent);
+  }
+
+  .work-grid:hover .work-card:not(:hover) .thumb img {
+    filter: saturate(0.6);
   }
 }
 
@@ -353,9 +369,14 @@ a {
   outline: none;
 }
 
-.work-card:focus-visible .thumb::before {
-  inset: -5px;
+.work-card:focus-visible .thumb {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.work-card:focus-visible .pill {
   opacity: 1;
+  translate: 0 0;
 }
 
 .work-meta {
@@ -364,7 +385,6 @@ a {
   align-items: baseline;
   gap: 16px;
   margin-top: 22px;
-  transition: opacity 0.25s var(--ease-out);
 }
 
 .work-meta .index {
