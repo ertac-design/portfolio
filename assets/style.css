@@ -234,6 +234,85 @@ a {
   color: var(--muted);
 }
 
+.section-head {
+  flex-wrap: wrap;
+}
+
+.head-tools {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.view-toggle {
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.view-toggle button {
+  font: inherit;
+  font-size: 15px;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
+}
+
+.view-toggle button:hover {
+  color: var(--ink);
+}
+
+.view-toggle button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.view-toggle button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Magnetic elements (class added by main.js on fine pointers) */
+
+.magnetic {
+  transition: transform 0.6s var(--ease-out);
+}
+
+.btn.magnetic {
+  transition: color 0.5s var(--ease-out), transform 0.6s var(--ease-out);
+}
+
+/* Word by word text reveal (words wrapped by main.js) */
+
+.split-words.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.split-words .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0 0.06em 0.12em 0;
+  margin: 0 -0.06em -0.12em 0;
+}
+
+.split-words .word > span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 1s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 45ms);
+}
+
+.split-words.in .word > span {
+  transform: none;
+}
+
 /* Work grid */
 
 .work-grid {
@@ -260,6 +339,14 @@ a {
 
 .work-card:hover .thumb img {
   transform: scale(1.07);
+}
+
+.work-grid {
+  transition: opacity 0.35s var(--ease-out);
+}
+
+.work-grid.is-switching {
+  opacity: 0;
 }
 
 .work-card .view {
@@ -306,6 +393,74 @@ a {
   color: var(--muted);
   white-space: nowrap;
   font-size: 15px;
+}
+
+/* Work list view */
+
+.work-grid.is-list {
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.is-list .work-card {
+  border-bottom: 1px solid var(--line);
+}
+
+.is-list .work-card .thumb {
+  display: none;
+}
+
+.is-list .work-meta {
+  align-items: baseline;
+  margin: 0;
+  padding-block: clamp(24px, 3.5vw, 44px);
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.is-list .work-meta h3 {
+  font-size: clamp(30px, 5vw, 72px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  transition: transform 0.6s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .is-list .work-card:hover h3 {
+    transform: translateX(16px);
+  }
+
+  .is-list:hover .work-card:not(:hover) .work-meta {
+    opacity: 0.35;
+  }
+}
+
+/* Floating preview that follows the cursor in list view */
+
+.work-preview {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 30;
+  width: clamp(260px, 26vw, 400px);
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--card);
+  pointer-events: none;
+  transform: scale(0);
+  will-change: transform;
+}
+
+.work-preview-track {
+  height: 100%;
+  transition: transform 0.7s var(--ease);
+}
+
+.work-preview-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* About teaser and page */
