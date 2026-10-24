@@ -1,6 +1,8 @@
-// Cross-document View Transitions: pairs a project card's image on the home
-// page with the cover on that project's page so one grows into the other.
-// Loaded in <head> without defer so pageswap/pagereveal are never missed.
+// Cross-document View Transitions: marks whether a navigation goes deeper
+// or back (style.css stages the sheets accordingly), and pairs a project
+// card's image on the home page with the cover on that project's page so
+// one grows into the other. Loaded in <head> without defer so
+// pageswap/pagereveal are never missed.
 (() => {
   const NAME = "project-cover";
   const LAST_PATH = "last-path";
@@ -10,6 +12,7 @@
   const clean = (path) => (path || "").replace(/\.html$/, "").replace(/\/index$/, "/");
   const isProject = (path) => /\/work\/[^/]+$/.test(clean(path));
   const isHome = (path) => !!path && clean(path).endsWith("/");
+  const depth = (path) => (isHome(path) ? 0 : 1);
 
   const coverOf = (path) => {
     if (isProject(location.pathname)) return document.querySelector(".cover");
@@ -51,14 +54,20 @@
     else if (isProject(here) && isHome(to)) pair(coverOf(here));
   });
 
-  // New page: name the matching element so the browser can morph between them.
+  // New page: set the direction and name the matching element so the
+  // browser can morph between them.
   window.addEventListener("pagereveal", (event) => {
     if (!event.viewTransition) return;
     let from = null;
     try { from = sessionStorage.getItem(LAST_PATH); } catch {}
     const here = location.pathname;
+    const root = document.documentElement;
+    if (from && depth(here) < depth(from)) root.dataset.vt = "back";
     if (isProject(here) && isHome(from)) pair(coverOf(here));
     else if (isHome(here) && isProject(from)) pair(coverOf(from));
-    event.viewTransition.finished.finally(unpair);
+    event.viewTransition.finished.finally(() => {
+      unpair();
+      delete root.dataset.vt;
+    });
   });
 })();
