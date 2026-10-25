@@ -174,7 +174,8 @@ a {
   line-height: 0.96;
   letter-spacing: -0.035em;
   font-weight: 600;
-  max-width: 15ch;
+  max-width: 12ch;
+  text-wrap: balance;
   margin: 0;
   clip-path: inset(0 0 100% 0);
   transform: translateY(24px);
@@ -282,8 +283,8 @@ a {
   color: var(--muted);
 }
 
-/* Work grid: on hover the card lifts, the image eases in,
-   a light follows the cursor and a frosted pill rises from the bottom. */
+/* Work grid: on hover the card lifts, the image eases in and a frosted
+   pill rises from the bottom. Images keep their original colour. */
 
 .work-grid {
   display: grid;
@@ -312,22 +313,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.2s var(--ease-out), filter 0.6s var(--ease-out);
-}
-
-/* Cursor light, positioned by main.js through --mx and --my */
-.work-card .media::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    420px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(255, 255, 255, 0.14),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.5s var(--ease-out);
-  pointer-events: none;
+  transition: transform 1.2s var(--ease-out);
 }
 
 .work-card .pill {
@@ -357,17 +343,12 @@ a {
     transform: scale(1.05);
   }
 
-  .work-card:hover .media::after,
   .work-card:hover .pill {
     opacity: 1;
   }
 
   .work-card:hover .pill {
     translate: 0 0;
-  }
-
-  .work-grid:hover .work-card:not(:hover) .media img {
-    filter: saturate(0.6);
   }
 }
 
@@ -408,9 +389,10 @@ a {
   font-size: 15px;
 }
 
-/* Brands: a compact strip of logos drifting left. main.js repeats the set
-   until it is wider than the strip and appends a hidden copy so the loop is
-   seamless. Logos render as ink silhouettes and regain colour on hover. */
+/* Brands: a compact strip of logos that drifts left on its own and can be
+   dragged, swiped or stepped with the side buttons. main.js keeps three
+   copies of the set and wraps the scroll position so it never runs out.
+   Logos render as ink silhouettes and regain colour on hover. */
 
 .brands {
   padding-block: 0 clamp(56px, 8vw, 96px);
@@ -422,10 +404,24 @@ a {
   margin: 0 0 20px;
 }
 
+.marquee-wrap {
+  position: relative;
+}
+
 .marquee {
-  overflow: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee::-webkit-scrollbar {
+  display: none;
+}
+
+.marquee.is-dragging {
+  cursor: grabbing;
 }
 
 .marquee-track {
@@ -434,14 +430,6 @@ a {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.marquee.is-running .marquee-track {
-  animation: marquee var(--marquee-duration, 30s) linear infinite;
-}
-
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
 }
 
 .marquee-track li {
@@ -456,6 +444,8 @@ a {
   width: auto;
   filter: grayscale(1) brightness(0);
   opacity: 0.7;
+  user-select: none;
+  -webkit-user-drag: none;
   transition: filter 0.4s var(--ease-out), opacity 0.4s var(--ease-out);
 }
 
@@ -470,9 +460,55 @@ a {
   }
 }
 
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
+.marquee-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out), background-color 0.2s, color 0.2s;
+}
+
+.marquee-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.marquee-btn.prev {
+  left: 0;
+}
+
+.marquee-btn.next {
+  right: 0;
+}
+
+.marquee-wrap:hover .marquee-btn,
+.marquee-btn:focus-visible {
+  opacity: 1;
+}
+
+.marquee-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+@media (hover: none) {
+  .marquee-btn {
+    display: none;
   }
 }
 
@@ -562,14 +598,15 @@ a {
   color: var(--muted);
 }
 
-/* Upwork: one quiet band that links to the profile */
+/* Upwork: one quiet band that links to the profile. The mark is Upwork's
+   own (Simple Icons, CC0) in its brand green on an ink disc. */
 
 .upwork {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 16px 40px;
-  padding: clamp(24px, 3vw, 36px) clamp(20px, 3vw, 40px);
+  gap: 16px 24px;
+  padding: clamp(20px, 2.4vw, 28px) clamp(20px, 3vw, 32px);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   transition: background-color 0.3s, border-color 0.3s;
@@ -580,35 +617,54 @@ a {
   border-color: var(--card);
 }
 
-.upwork-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: var(--on-accent);
-  font-size: 15px;
-  font-weight: 500;
-  white-space: nowrap;
+.upwork-logo {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #15231c;
 }
 
-.upwork-badge svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
+.upwork-logo svg {
+  width: 30px;
+  height: 30px;
+  fill: #6fda44;
 }
 
 .upwork-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .upwork-title {
-  font-size: clamp(20px, 2vw, 26px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  font-size: clamp(20px, 2vw, 24px);
   font-weight: 500;
   letter-spacing: -0.02em;
+}
+
+.upwork-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.upwork-badge svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
 }
 
 .upwork-note {
@@ -715,30 +771,87 @@ a {
   padding-block: clamp(72px, 10vw, 140px) 32px;
 }
 
+.contact {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 32px 24px;
+  align-items: end;
+}
+
+.contact-intro {
+  grid-column: 1 / span 7;
+}
+
 .footer-title {
-  font-size: clamp(28px, 3.6vw, 52px);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  font-weight: 500;
-  max-width: 22ch;
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  font-weight: 600;
   margin: 0;
 }
 
+.contact-intro p {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.contact-mail {
+  grid-column: 8 / span 5;
+  justify-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
 .mail {
-  display: inline-block;
-  margin-top: clamp(32px, 5vw, 56px);
-  font-size: clamp(26px, 5.4vw, 84px);
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  font-weight: 600;
-  color: var(--accent);
-  background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat;
-  transition: background-size 0.6s var(--ease-out);
-  overflow-wrap: anywhere;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 0.3s;
 }
 
 .mail:hover {
-  background-size: 100% 2px;
+  text-decoration-color: currentColor;
+}
+
+.copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.copy svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.copy:hover {
+  border-color: var(--ink);
+}
+
+.copy.is-copied {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 
 .footer-bottom {
@@ -1015,8 +1128,18 @@ html[data-vt="back"]::view-transition-new(root) {
   }
 
   .upwork {
-    grid-template-columns: 1fr;
-    justify-items: start;
+    grid-template-columns: auto 1fr;
+  }
+
+  .upwork-cta {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .contact-intro,
+  .contact-mail {
+    grid-column: 1 / -1;
+    justify-self: start;
   }
 }
 
@@ -1038,12 +1161,6 @@ html[data-vt="back"]::view-transition-new(root) {
   *::after {
     animation: none !important;
     transition-duration: 0.01ms !important;
-  }
-
-  .marquee-track {
-    flex-wrap: wrap;
-    justify-content: center;
-    width: auto;
   }
 
   .display .line > span,
