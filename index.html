@@ -12,7 +12,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%232e5a48'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="expect" href="#contact" blocking="render">
   <script src="assets/transition.js"></script>
@@ -40,6 +40,17 @@
         <div><dt>Experience</dt><dd>17+ years</dd></div>
         <div><dt>Status</dt><dd><span class="status"></span>Open to new projects</dd></div>
       </dl>
+    </section>
+
+    <section class="brands wrap" aria-labelledby="brands-title">
+      <p class="brands-title" id="brands-title">Brands I've designed for</p>
+      <div class="marquee" data-marquee>
+        <ul class="marquee-track">
+          <li><img src="assets/brands/paribu-cineverse.svg" alt="Paribu Cineverse" height="30"></li>
+          <li><img src="assets/brands/opet.svg" alt="Opet" height="30"></li>
+          <li><img src="assets/brands/enterprise.svg" alt="Enterprise" height="30"></li>
+        </ul>
+      </div>
     </section>
 
     <section class="section wrap" id="work">
@@ -91,30 +102,46 @@
       </div>
     </section>
 
-    <section class="section wrap" id="brands">
+    <section class="section wrap" id="testimonials">
       <div class="section-head">
-        <h2 class="section-title">Brands I've designed for</h2>
+        <h2 class="section-title">What clients say</h2>
       </div>
-      <ul class="brand-grid">
-        <li>
-          <a class="brand" href="work/paribu-cineverse.html" data-label="Paribu Cineverse">
-            <span class="brand-sector">Cinema</span>
-            <span><span class="brand-name">Paribu Cineverse</span><span class="brand-work">Ticketing, food and drinks, loyalty</span></span>
-          </a>
-        </li>
-        <li>
-          <a class="brand" href="work/opet-ai-connect.html" data-label="Opet AI Connect">
-            <span class="brand-sector">Fuel retail</span>
-            <span><span class="brand-name">Opet</span><span class="brand-work">AI campaign and rich media</span></span>
-          </a>
-        </li>
-        <li>
-          <a class="brand" href="work/enterprise-mobile-app.html" data-label="Enterprise Mobile App">
-            <span class="brand-sector">Car rental</span>
-            <span><span class="brand-name">Enterprise</span><span class="brand-work">Booking, extras and checkout app</span></span>
-          </a>
-        </li>
-      </ul>
+      <div class="quotes" data-quotes>
+        <div class="quote-list" role="tablist" aria-label="Client testimonials">
+          <button class="quote-tab" type="button" role="tab" id="quote-tab-1" aria-controls="quote-1" aria-selected="true">
+            <span class="quote-name">Client name</span>
+            <span class="quote-role">Role, company</span>
+          </button>
+          <button class="quote-tab" type="button" role="tab" id="quote-tab-2" aria-controls="quote-2" aria-selected="false" tabindex="-1">
+            <span class="quote-name">Client name</span>
+            <span class="quote-role">Role, company</span>
+          </button>
+          <button class="quote-tab" type="button" role="tab" id="quote-tab-3" aria-controls="quote-3" aria-selected="false" tabindex="-1">
+            <span class="quote-name">Client name</span>
+            <span class="quote-role">Role, company</span>
+          </button>
+        </div>
+        <figure class="quote" role="tabpanel" id="quote-1" aria-labelledby="quote-tab-1">
+          <blockquote><p>Placeholder for the first client quote. Two or three sentences about working together read best here.</p></blockquote>
+        </figure>
+        <figure class="quote" role="tabpanel" id="quote-2" aria-labelledby="quote-tab-2" hidden>
+          <blockquote><p>Placeholder for the second client quote. Replace it with a review from Upwork or a past client.</p></blockquote>
+        </figure>
+        <figure class="quote" role="tabpanel" id="quote-3" aria-labelledby="quote-tab-3" hidden>
+          <blockquote><p>Placeholder for the third client quote. Keep each one short so the block stays compact.</p></blockquote>
+        </figure>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <a class="upwork" href="https://www.upwork.com/freelancers/ertacyavasca" target="_blank" rel="noopener">
+        <span class="upwork-badge"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .8l2.1 4.6 5 .5-3.8 3.4 1.1 4.9L8 11.7l-4.4 2.5 1.1-4.9L.9 5.9l5-.5z"/></svg>Top Rated</span>
+        <span class="upwork-text">
+          <span class="upwork-title">Top Rated on Upwork</span>
+          <span class="upwork-note">Client reviews, work history and direct hiring on my profile.</span>
+        </span>
+        <span class="upwork-cta">View Upwork profile</span>
+      </a>
     </section>
 
     <section class="section wrap">
