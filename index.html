@@ -3,98 +3,156 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ertaç Yavaşça, Product Designer</title>
+  <title>Ertac Yavasca, Product Designer</title>
   <meta name="description" content="Senior UI/UX and Product Designer and Art Director with 17+ years of creating intuitive digital experiences.">
-  <meta property="og:title" content="Ertaç Yavaşça, Product Designer">
+  <meta property="og:title" content="Ertac Yavasca, Product Designer">
   <meta property="og:description" content="Senior UI/UX and Product Designer and Art Director with 17+ years of creating intuitive digital experiences.">
-  <meta name="theme-color" content="#f3f1ec">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23ff5a1f'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#eef1ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1712" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%232e5a48'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap">
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="expect" href="#contact" blocking="render">
+  <script src="assets/transition.js"></script>
   <script defer src="assets/main.js"></script>
 </head>
 <body data-page="Home">
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap">
-      <a class="logo" href="index.html" data-label="Home">Ertaç Yavaşça <span>/ Product Designer</span></a>
+      <a class="logo" href="index.html" data-label="Home">Ertac Yavasca <span>/ Product Designer</span></a>
       <nav class="nav" aria-label="Main">
-        <a href="index.html#work">Work</a>
-        <a href="about.html">About</a>
-        <a href="#contact">Contact</a>
+        <a href="index.html#work"><span>Work</span></a>
+        <a href="about.html"><span>About</span></a>
+        <a href="#contact"><span>Contact</span></a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero wrap">
-      <p class="eyebrow"><span class="dot"></span>Available for new projects</p>
-      <h1 class="display" aria-label="Ertaç Yavaşça">
-        <span class="line"><span>Ertaç</span></span>
-        <span class="line"><span>Yavaşça</span></span>
-      </h1>
-      <div class="hero-foot">
-        <div class="role">Senior UI/UX Designer<br>Product Designer &amp; Art Director</div>
-        <p class="lede">17+ years creating intuitive digital experiences for brands people use every day.</p>
+      <h1 class="hero-title">Products that feel easy.</h1>
+      <dl class="spec">
+        <div><dt>Name</dt><dd>Ertac Yavasca</dd></div>
+        <div><dt>Role</dt><dd>Senior Product Designer<br>Art Director</dd></div>
+        <div><dt>Experience</dt><dd>17+ years</dd></div>
+        <div><dt>Status</dt><dd><span class="status"></span>Open to new projects</dd></div>
+      </dl>
+    </section>
+
+    <section class="brands wrap" aria-labelledby="brands-title">
+      <p class="brands-title" id="brands-title">Brands I've designed for</p>
+      <div class="marquee-wrap">
+        <button class="marquee-btn prev" type="button" aria-label="Scroll brands left"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="marquee" data-marquee>
+          <ul class="marquee-track">
+            <li><img src="assets/brands/paribu-cineverse.svg" alt="Paribu Cineverse" height="30" draggable="false"></li>
+            <li><img src="assets/brands/opet.svg" alt="Opet" height="30" draggable="false"></li>
+            <li><img src="assets/brands/enterprise.svg" alt="Enterprise" height="30" draggable="false"></li>
+          </ul>
+        </div>
+        <button class="marquee-btn next" type="button" aria-label="Scroll brands right"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
     </section>
 
     <section class="section wrap" id="work">
       <div class="section-head">
-        <h2 class="section-title reveal">Selected work</h2>
-        <span class="count">(04)</span>
+        <h2 class="section-title">Selected work</h2>
+        <span class="count">4 projects</span>
       </div>
       <div class="work-grid">
-        <a class="work-card reveal" href="work/paribu-cineverse.html" data-label="Paribu Cineverse">
+        <a class="work-card" href="work/paribu-cineverse.html" data-label="Paribu Cineverse">
           <div class="thumb">
-            <img src="https://cdn.dribbble.com/userupload/46228557/file/c530c7451fdaf831512f72bf917476f7.jpg?format=webp&resize=1600x1200&vertical=center" alt="Paribu Cineverse project preview" width="1600" height="1200" loading="lazy">
-            <span class="view">View</span>
+            <div class="media"><img src="https://cdn.dribbble.com/userupload/46228557/file/c530c7451fdaf831512f72bf917476f7.jpg?format=webp&resize=1600x1200&vertical=center" alt="Paribu Cineverse project preview" width="1600" height="1200" loading="lazy"></div>
+            <span class="pill" aria-hidden="true">View project</span>
           </div>
           <div class="work-meta">
             <h3>Paribu Cineverse</h3>
-            <p>Cinema booking</p>
+            <p>Cinema booking, mobile and web</p>
           </div>
         </a>
-        <a class="work-card reveal" href="work/opet-ai-connect.html" data-label="Opet AI Connect">
+        <a class="work-card" href="work/opet-ai-connect.html" data-label="Opet AI Connect">
           <div class="thumb">
-            <img src="https://cdn.dribbble.com/userupload/46262378/file/f78a3744526e1adac48ee7804104a9ff.jpg?format=webp&resize=1600x1200&vertical=center" alt="Opet AI Connect project preview" width="1600" height="1200" loading="lazy">
-            <span class="view">View</span>
+            <div class="media"><img src="https://cdn.dribbble.com/userupload/46262378/file/f78a3744526e1adac48ee7804104a9ff.jpg?format=webp&resize=1600x1200&vertical=center" alt="Opet AI Connect project preview" width="1600" height="1200" loading="lazy"></div>
+            <span class="pill" aria-hidden="true">View project</span>
           </div>
           <div class="work-meta">
             <h3>Opet AI Connect</h3>
-            <p>AI, rich media</p>
+            <p>AI rich media campaign, web</p>
           </div>
         </a>
-        <a class="work-card reveal" href="work/enterprise-mobile-app.html" data-label="Enterprise Mobile App">
+        <a class="work-card" href="work/enterprise-mobile-app.html" data-label="Enterprise Mobile App">
           <div class="thumb">
-            <img src="https://cdn.dribbble.com/userupload/49062266/file/aff133f461d313559cdbea2906c7f516.png?format=webp&resize=1600x1200&vertical=center" alt="Enterprise Mobile App project preview" width="1600" height="1200" loading="lazy">
-            <span class="view">View</span>
+            <div class="media"><img src="https://cdn.dribbble.com/userupload/49062266/file/aff133f461d313559cdbea2906c7f516.png?format=webp&resize=1600x1200&vertical=center" alt="Enterprise Mobile App project preview" width="1600" height="1200" loading="lazy"></div>
+            <span class="pill" aria-hidden="true">View project</span>
           </div>
           <div class="work-meta">
             <h3>Enterprise Mobile App</h3>
-            <p>Car rental, mobile</p>
+            <p>Car rental app, mobile</p>
           </div>
         </a>
-        <a class="work-card reveal" href="work/cinema-app-concept.html" data-label="Cinema App Concept">
+        <a class="work-card" href="work/cinema-app-concept.html" data-label="Cinema App Concept">
           <div class="thumb">
-            <img src="https://cdn.dribbble.com/userupload/49076557/file/be15c1e4a1f157dd99f899fd97ec6a89.jpg?format=webp&resize=1600x1200&vertical=center" alt="Cinema App Concept project preview" width="1600" height="1200" loading="lazy">
-            <span class="view">View</span>
+            <div class="media"><img src="https://cdn.dribbble.com/userupload/49076557/file/be15c1e4a1f157dd99f899fd97ec6a89.jpg?format=webp&resize=1600x1200&vertical=center" alt="Cinema App Concept project preview" width="1600" height="1200" loading="lazy"></div>
+            <span class="pill" aria-hidden="true">View project</span>
           </div>
           <div class="work-meta">
             <h3>Cinema App Concept</h3>
-            <p>Mobile, concept</p>
+            <p>Personal concept, mobile</p>
           </div>
         </a>
       </div>
     </section>
 
+    <section class="section wrap" id="testimonials">
+      <div class="section-head">
+        <h2 class="section-title">What clients say</h2>
+      </div>
+      <div class="quotes" data-quotes>
+        <div class="quote-list" role="tablist" aria-label="Client testimonials">
+          <button class="quote-tab" type="button" role="tab" id="quote-tab-1" aria-controls="quote-1" aria-selected="true">
+            <span class="quote-name">Client name</span>
+            <span class="quote-role">Role, company</span>
+          </button>
+          <button class="quote-tab" type="button" role="tab" id="quote-tab-2" aria-controls="quote-2" aria-selected="false" tabindex="-1">
+            <span class="quote-name">Client name</span>
+            <span class="quote-role">Role, company</span>
+          </button>
+          <button class="quote-tab" type="button" role="tab" id="quote-tab-3" aria-controls="quote-3" aria-selected="false" tabindex="-1">
+            <span class="quote-name">Client name</span>
+            <span class="quote-role">Role, company</span>
+          </button>
+        </div>
+        <figure class="quote" role="tabpanel" id="quote-1" aria-labelledby="quote-tab-1">
+          <blockquote><p>Placeholder for the first client quote. Two or three sentences about working together read best here.</p></blockquote>
+        </figure>
+        <figure class="quote" role="tabpanel" id="quote-2" aria-labelledby="quote-tab-2" hidden>
+          <blockquote><p>Placeholder for the second client quote. Replace it with a review from Upwork or a past client.</p></blockquote>
+        </figure>
+        <figure class="quote" role="tabpanel" id="quote-3" aria-labelledby="quote-tab-3" hidden>
+          <blockquote><p>Placeholder for the third client quote. Keep each one short so the block stays compact.</p></blockquote>
+        </figure>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <a class="upwork" href="https://www.upwork.com/freelancers/ertacyavasca" target="_blank" rel="noopener">
+        <span class="upwork-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.828v7.112c-.002 1.406-1.141 2.546-2.547 2.548-1.405-.002-2.543-1.143-2.545-2.548V3.492H0v7.112c0 2.914 2.37 5.303 5.281 5.303 2.913 0 5.283-2.389 5.283-5.303v-1.19c.529 1.107 1.182 2.229 1.974 3.221l-1.673 7.873h2.797l1.213-5.71c1.063.679 2.285 1.109 3.686 1.109 3 0 5.439-2.452 5.439-5.45 0-3-2.439-5.439-5.439-5.439z"/></svg></span>
+        <span class="upwork-text">
+          <span class="upwork-title">Upwork <span class="upwork-badge"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .8l2.1 4.6 5 .5-3.8 3.4 1.1 4.9L8 11.7l-4.4 2.5 1.1-4.9L.9 5.9l5-.5z"/></svg>Top Rated</span></span>
+          <span class="upwork-note">Client reviews, work history and direct hiring on my profile.</span>
+        </span>
+        <span class="upwork-cta">View profile</span>
+      </a>
+    </section>
+
     <section class="section wrap">
-      <p class="statement reveal">I design products that feel easy from the first tap, <em>and art direct the visual language around them.</em></p>
+      <h2 class="statement">Research, flows and interfaces, with the visual language around them art directed by the same hand.</h2>
       <div class="split">
-        <div class="side reveal">About</div>
-        <div class="main reveal">
-          <p>I'm a senior product designer and art director with more than 17 years of experience. I work across research, interaction design and visual design, from early concepts to polished interfaces.</p>
+        <div class="main">
+          <p>I'm a senior product designer and art director. I work across research, interaction design and visual design, from early concepts to polished interfaces for cinema chains, fuel brands and car rental apps.</p>
           <a class="btn" href="about.html" data-label="About">More about me</a>
         </div>
       </div>
@@ -103,13 +161,18 @@
 
   <footer class="site-footer" id="contact">
     <div class="wrap">
-      <h2 class="section-title reveal">Let's build something people enjoy using.</h2>
-      <div class="footer-cta reveal">
-        <a class="btn solid" href="mailto:ertacyavasca@gmail.com">ertacyavasca@gmail.com</a>
-        <a class="btn" href="https://www.linkedin.com/in/ertacyavasca" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      <div class="contact">
+        <div class="contact-intro">
+          <h2 class="footer-title">Let's work together.</h2>
+          <p>Open to new product and design work. Send a brief or just say hello.</p>
+        </div>
+        <div class="contact-mail">
+          <a class="mail" href="mailto:ertacyavasca@gmail.com">ertacyavasca@gmail.com</a>
+          <button class="copy" type="button" data-copy="ertacyavasca@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span aria-live="polite">Copy</span></button>
+        </div>
       </div>
       <div class="footer-bottom">
-        <span class="muted">&copy; <span data-year>2026</span> Ertaç Yavaşça</span>
+        <span class="muted">&copy; <span data-year>2026</span> Ertac Yavasca</span>
         <div class="socials">
           <a class="link-line" href="https://dribbble.com/ErtacYavasca" target="_blank" rel="noopener">Dribbble</a>
           <a class="link-line" href="https://www.linkedin.com/in/ertacyavasca" target="_blank" rel="noopener">LinkedIn</a>

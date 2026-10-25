@@ -1,6 +1,6 @@
 # portfolio
 
-Personal portfolio of Ertaç Yavaşça, Senior UI/UX and Product Designer.
+Personal portfolio of Ertac Yavasca, Senior UI/UX and Product Designer.
 
 Plain HTML, CSS and JavaScript, no build step. Published with GitHub Pages.
 

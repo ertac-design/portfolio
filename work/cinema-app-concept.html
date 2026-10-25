@@ -3,33 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cinema App Concept, Ertaç Yavaşça</title>
+  <title>Cinema App Concept, Ertac Yavasca</title>
   <meta name="description" content="A cinema app concept with seat reservation and a dark mode family club.">
-  <meta property="og:title" content="Cinema App Concept, Ertaç Yavaşça">
+  <meta property="og:title" content="Cinema App Concept, Ertac Yavasca">
   <meta property="og:description" content="A cinema app concept with seat reservation and a dark mode family club.">
-  <meta name="theme-color" content="#f3f1ec">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23ff5a1f'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#eef1ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1712" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%232e5a48'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap">
   <link rel="stylesheet" href="../assets/style.css">
+  <link rel="expect" href="#contact" blocking="render">
+  <script src="../assets/transition.js"></script>
   <script defer src="../assets/main.js"></script>
 </head>
 <body data-page="Cinema App Concept">
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap">
-      <a class="logo" href="../index.html" data-label="Home">Ertaç Yavaşça <span>/ Product Designer</span></a>
+      <a class="logo" href="../index.html" data-label="Home">Ertac Yavasca <span>/ Product Designer</span></a>
       <nav class="nav" aria-label="Main">
-        <a href="../index.html#work" aria-current="page">Work</a>
-        <a href="../about.html">About</a>
-        <a href="#contact">Contact</a>
+        <a href="../index.html#work" aria-current="page"><span>Work</span></a>
+        <a href="../about.html"><span>About</span></a>
+        <a href="#contact"><span>Contact</span></a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="project-hero wrap">
-      <p class="eyebrow"><span class="dot"></span>Mobile, concept</p>
+      <p class="label">Mobile, concept</p>
       <h1 class="display" aria-label="Cinema App Concept">
         <span class="line"><span>Cinema App</span></span>
         <span class="line"><span>Concept</span></span>
@@ -43,15 +47,15 @@
     </section>
 
     <section class="wrap">
-      <div class="cover reveal">
+      <div class="cover">
         <img src="https://cdn.dribbble.com/userupload/49076557/file/be15c1e4a1f157dd99f899fd97ec6a89.jpg?format=webp&resize=1600x1200&vertical=center" alt="Cinema App Concept cover" width="1600" height="1200">
       </div>
     </section>
 
     <section class="section wrap">
       <div class="split" style="margin-top:0">
-        <div class="side reveal">A cinema app concept with seat reservation and a dark mode family club.</div>
-        <div class="main prose reveal">
+        <div class="side">A cinema app concept with seat reservation and a dark mode family club.</div>
+        <div class="main prose">
           <h2>Overview</h2>
           <p>A concept for a cinema app covering the core moments of a night out: finding a film, reading the details and picking a seat.</p>
           <h2>Kids Family Club</h2>
@@ -63,15 +67,15 @@
 
     <section class="wrap">
       <div class="gallery">
-        <figure class="reveal">
+        <figure>
           <img src="https://cdn.dribbble.com/userupload/49076559/file/179fed15a9ce1f9c8256a40f8a8bd8e0.jpg?format=webp&resize=1600x1200&vertical=center" alt="Cinema App UI Concept" width="1600" height="1200" loading="lazy">
           <figcaption>Cinema App UI Concept</figcaption>
         </figure>
-        <figure class="reveal">
+        <figure>
           <img src="https://cdn.dribbble.com/userupload/49076475/file/caffd0e023aece38c4b5d40da4d797db.jpg?format=webp&resize=1600x1200&vertical=center" alt="Movie Details &amp; Seat Reservation" width="1600" height="1200" loading="lazy">
           <figcaption>Movie Details &amp; Seat Reservation</figcaption>
         </figure>
-        <figure class="reveal">
+        <figure>
           <img src="https://cdn.dribbble.com/userupload/49076467/file/a4d89c979765f445298ed2be07ada79b.jpg?format=webp&resize=1600x1200&vertical=center" alt="Dark Mode Cinema UI, Kids Family Club" width="1600" height="1200" loading="lazy">
           <figcaption>Dark Mode Cinema UI, Kids Family Club</figcaption>
         </figure>
@@ -86,13 +90,18 @@
 
   <footer class="site-footer" id="contact">
     <div class="wrap">
-      <h2 class="section-title reveal">Let's build something people enjoy using.</h2>
-      <div class="footer-cta reveal">
-        <a class="btn solid" href="mailto:ertacyavasca@gmail.com">ertacyavasca@gmail.com</a>
-        <a class="btn" href="https://www.linkedin.com/in/ertacyavasca" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      <div class="contact">
+        <div class="contact-intro">
+          <h2 class="footer-title">Let's work together.</h2>
+          <p>Open to new product and design work. Send a brief or just say hello.</p>
+        </div>
+        <div class="contact-mail">
+          <a class="mail" href="mailto:ertacyavasca@gmail.com">ertacyavasca@gmail.com</a>
+          <button class="copy" type="button" data-copy="ertacyavasca@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span aria-live="polite">Copy</span></button>
+        </div>
       </div>
       <div class="footer-bottom">
-        <span class="muted">&copy; <span data-year>2026</span> Ertaç Yavaşça</span>
+        <span class="muted">&copy; <span data-year>2026</span> Ertac Yavasca</span>
         <div class="socials">
           <a class="link-line" href="https://dribbble.com/ErtacYavasca" target="_blank" rel="noopener">Dribbble</a>
           <a class="link-line" href="https://www.linkedin.com/in/ertacyavasca" target="_blank" rel="noopener">LinkedIn</a>
