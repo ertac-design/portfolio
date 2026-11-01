@@ -3,72 +3,95 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About, Ertaç Yavaşça</title>
+  <title>About, Ertac Yavasca</title>
   <meta name="description" content="Senior Product Designer and Art Director with 17+ years of experience.">
-  <meta property="og:title" content="About, Ertaç Yavaşça">
+  <meta property="og:title" content="About, Ertac Yavasca">
   <meta property="og:description" content="Senior Product Designer and Art Director with 17+ years of experience.">
-  <meta name="theme-color" content="#f3f1ec">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23ff5a1f'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#eef1ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1712" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%232e5a48'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap">
   <link rel="stylesheet" href="assets/style.css">
+  <link rel="expect" href="#contact" blocking="render">
+  <script src="assets/transition.js"></script>
   <script defer src="assets/main.js"></script>
 </head>
 <body data-page="About">
+  <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="wrap">
-      <a class="logo" href="index.html" data-label="Home">Ertaç Yavaşça <span>/ Product Designer</span></a>
+      <a class="logo" href="index.html" data-label="Home">Ertac Yavasca <span>/ Product Designer</span></a>
       <nav class="nav" aria-label="Main">
-        <a href="index.html#work">Work</a>
-        <a href="about.html" aria-current="page">About</a>
-        <a href="#contact">Contact</a>
+        <a href="index.html#work"><span>Work</span></a>
+        <a href="about.html" aria-current="page"><span>About</span></a>
+        <a href="#contact"><span>Contact</span></a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="project-hero wrap">
-      <p class="eyebrow"><span class="dot"></span>About</p>
       <h1 class="display">
         <span class="line"><span>Design that</span></span>
         <span class="line"><span>feels obvious.</span></span>
       </h1>
-    </section>
-
-    <section class="section wrap" style="padding-top:0">
-      <div class="split" style="margin-top:0">
-        <div class="side reveal">Who I am</div>
-        <div class="main prose reveal">
-          <p>I'm Ertaç Yavaşça, a Senior Product Designer and Art Director. For more than 17 years I've been creating intuitive digital experiences, from cinema booking apps used by millions to AI driven brand campaigns.</p>
+      <div class="about-intro">
+        <p class="about-lede">I'm Ertac Yavasca, a senior product designer and art director with more than 17 years of practice.</p>
+        <div class="about-body">
+          <p>I've designed cinema booking apps used by millions, AI driven brand campaigns and enterprise mobile products.</p>
           <p>I care about the details that make a product easy to understand: clear flows, honest interfaces and a visual language that fits the brand.</p>
         </div>
       </div>
+      <dl class="facts about-facts">
+        <div><dt>Experience</dt><dd>17+ years</dd></div>
+        <div><dt>Focus</dt><dd>Product design, UI/UX, art direction</dd></div>
+        <div><dt>Industries</dt><dd>Cinema, fuel retail, car rental</dd></div>
+        <div><dt>Status</dt><dd><span class="status"></span>Open to new projects</dd></div>
+      </dl>
     </section>
 
-    <section class="section wrap" style="padding-top:0">
+    <section class="section wrap">
       <div class="section-head">
-        <h2 class="section-title reveal">What I do</h2>
+        <h2 class="section-title">How I work</h2>
+      </div>
+      <ol class="process">
+        <li><span class="process-step">1</span><h3>Understand</h3><p>I start with the people, the business goal and what already exists, so the work solves the right problem.</p></li>
+        <li><span class="process-step">2</span><h3>Map the flow</h3><p>Flows and wireframes come before pixels. This is where most of the complexity gets removed.</p></li>
+        <li><span class="process-step">3</span><h3>Design the interface</h3><p>Screens are designed as a system, tested early and refined until each one does a single job clearly.</p></li>
+        <li><span class="process-step">4</span><h3>Refine and hand off</h3><p>Visual language, motion and handoff details, so what ships looks and feels like the design.</p></li>
+      </ol>
+    </section>
+
+    <section class="section wrap">
+      <div class="section-head">
+        <h2 class="section-title">What I do</h2>
       </div>
       <ul class="services">
-        <li class="reveal">Product Design <span>Strategy to shipped</span></li>
-        <li class="reveal">UI/UX Design <span>Mobile &amp; web</span></li>
-        <li class="reveal">Art Direction <span>Visual language</span></li>
-        <li class="reveal">Interactive &amp; Rich Media <span>Campaigns</span></li>
-        <li class="reveal">UX Research <span>Flows &amp; testing</span></li>
+        <li><h3>Product Design</h3><span class="service-tag">Strategy to shipped</span><p>Shaping products from the first idea to release: defining the problem, aligning the team and keeping the experience consistent as it grows.</p></li>
+        <li><h3>UI/UX Design</h3><span class="service-tag">Mobile and web</span><p>Flows and interfaces that make complex tasks feel simple, from wireframes to polished, developer ready screens.</p></li>
+        <li><h3>Art Direction</h3><span class="service-tag">Visual language</span><p>The visual language around a product or campaign: type, colour, imagery and motion that fit the brand.</p></li>
+        <li><h3>Interactive and Rich Media</h3><span class="service-tag">Campaigns</span><p>Interactive campaign experiences and rich media formats that invite people to explore, play and act.</p></li>
+        <li><h3>UX Research</h3><span class="service-tag">Flows and testing</span><p>Interviews, usability tests and flow audits that turn what people actually do into clear design decisions.</p></li>
       </ul>
     </section>
   </main>
 
   <footer class="site-footer" id="contact">
     <div class="wrap">
-      <h2 class="section-title reveal">Let's build something people enjoy using.</h2>
-      <div class="footer-cta reveal">
-        <a class="btn solid" href="mailto:ertacyavasca@gmail.com">ertacyavasca@gmail.com</a>
-        <a class="btn" href="https://www.linkedin.com/in/ertacyavasca" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      <div class="contact">
+        <div class="contact-intro">
+          <h2 class="footer-title">Let's work together.</h2>
+          <p>Open to new product and design work. Send a brief or just say hello.</p>
+        </div>
+        <div class="contact-mail">
+          <a class="btn btn-solid" href="mailto:ertacyavasca@gmail.com?subject=New%20project">Start a project</a>
+          <button class="copy" type="button" data-copy="ertacyavasca@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span aria-live="polite">Copy email</span></button>
+        </div>
       </div>
       <div class="footer-bottom">
-        <span class="muted">&copy; <span data-year>2026</span> Ertaç Yavaşça</span>
+        <span class="muted">&copy; <span data-year>2026</span> Ertac Yavasca</span>
         <div class="socials">
           <a class="link-line" href="https://dribbble.com/ErtacYavasca" target="_blank" rel="noopener">Dribbble</a>
           <a class="link-line" href="https://www.linkedin.com/in/ertacyavasca" target="_blank" rel="noopener">LinkedIn</a>
