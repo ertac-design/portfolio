@@ -102,30 +102,66 @@
     requestAnimationFrame(tick);
   });
 
-  // Testimonials: client names switch the quote (tabs, with arrow keys).
-  document.querySelectorAll("[data-quotes]").forEach((block) => {
-    const tabs = [...block.querySelectorAll('[role="tab"]')];
-    const select = (tab) => {
-      tabs.forEach((t) => {
-        const on = t === tab;
-        t.setAttribute("aria-selected", String(on));
-        t.tabIndex = on ? 0 : -1;
-        const panel = block.querySelector(`#${t.getAttribute("aria-controls")}`);
-        panel.hidden = !on;
-        panel.classList.toggle("is-entering", on);
-      });
+  // Testimonials: a snapping row of cards. The card nearest the left edge
+  // is the active one; buttons step between cards and mouse drags scroll.
+  document.querySelectorAll("[data-slider]").forEach((slider) => {
+    const row = slider.querySelector(".slides");
+    const slides = [...row.children];
+    const section = slider.closest("section");
+    const prev = section.querySelector("[data-prev]");
+    const next = section.querySelector("[data-next]");
+    const current = section.querySelector("[data-current]");
+    section.querySelector("[data-total]").textContent = slides.length;
+    let active = -1;
+
+    const setActive = (index) => {
+      if (index === active) return;
+      active = index;
+      slides.forEach((slide, i) => slide.classList.toggle("is-active", i === index));
+      current.textContent = index + 1;
+      slider.style.setProperty("--progress", `${((index + 1) / slides.length) * 100}%`);
+      prev.disabled = index === 0;
+      next.disabled = index === slides.length - 1;
     };
-    tabs.forEach((tab, i) => {
-      tab.addEventListener("click", () => select(tab));
-      tab.addEventListener("keydown", (event) => {
-        const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[event.key];
-        if (!step) return;
-        event.preventDefault();
-        const next = tabs[(i + step + tabs.length) % tabs.length];
-        next.focus();
-        select(next);
+    const nearest = () => {
+      const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 2;
+      if (atEnd) return slides.length - 1;
+      let best = 0;
+      slides.forEach((slide, i) => {
+        if (Math.abs(slide.offsetLeft - row.offsetLeft - row.scrollLeft) <
+            Math.abs(slides[best].offsetLeft - row.offsetLeft - row.scrollLeft)) best = i;
       });
+      return best;
+    };
+    const go = (index) => {
+      const target = slides[Math.max(0, Math.min(slides.length - 1, index))];
+      row.scrollTo({ left: target.offsetLeft - row.offsetLeft, behavior: reduceMotion ? "auto" : "smooth" });
+    };
+
+    row.addEventListener("scroll", () => setActive(nearest()), { passive: true });
+    prev.addEventListener("click", () => go(active - 1));
+    next.addEventListener("click", () => go(active + 1));
+
+    let drag = null;
+    row.addEventListener("pointerdown", (event) => {
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      drag = { x: event.clientX, left: row.scrollLeft };
+      row.setPointerCapture(event.pointerId);
+      row.classList.add("is-dragging");
     });
+    row.addEventListener("pointermove", (event) => {
+      if (drag) row.scrollLeft = drag.left - (event.clientX - drag.x);
+    });
+    const endDrag = () => {
+      if (!drag) return;
+      drag = null;
+      row.classList.remove("is-dragging");
+      go(nearest());
+    };
+    row.addEventListener("pointerup", endDrag);
+    row.addEventListener("pointercancel", endDrag);
+
+    setActive(0);
   });
 
   // Copy the email address, with a short confirmation on the button.

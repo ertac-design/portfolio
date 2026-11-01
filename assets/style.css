@@ -541,100 +541,165 @@ a {
   }
 }
 
-/* Testimonials: one quote at a time; the client names on the side are
-   tabs that switch it. */
+/* Testimonials: a row of cards that slides sideways (drag, swipe, scroll or
+   the buttons). The card in front turns ink; a counter and a thin progress
+   line show where you are. */
 
-.quotes {
+.slider-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slider-count {
+  font-size: 15px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  margin-right: 8px;
+}
+
+.round-btn {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 24px;
-  align-items: start;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
 }
 
-.quote {
-  grid-column: 1 / span 8;
-  grid-row: 1;
+.round-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.round-btn:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.round-btn:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.slides {
+  display: flex;
+  gap: clamp(12px, 1.6vw, 20px);
+  list-style: none;
   margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
 }
 
-.quote[hidden] {
+.slides::-webkit-scrollbar {
   display: none;
 }
 
-.quote blockquote {
+.slides.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.slide {
+  flex: 0 0 min(540px, 86%);
+  scroll-snap-align: start;
+}
+
+.tcard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  height: 100%;
+  min-height: 320px;
+  margin: 0;
+  padding: clamp(24px, 2.6vw, 36px);
+  border-radius: 24px;
+  background: var(--card);
+  color: var(--ink);
+  user-select: none;
+  transition: background-color 0.5s var(--ease-out), color 0.5s var(--ease-out);
+}
+
+.slide.is-active .tcard {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.tcard blockquote {
   margin: 0;
 }
 
-.quote p {
-  font-size: clamp(24px, 2.6vw, 36px);
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  max-width: 30ch;
+.tcard p {
+  font-size: clamp(20px, 1.8vw, 26px);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
   margin: 0;
 }
 
-.quote.is-entering p {
-  animation: quote-in 0.5s var(--ease-out) both;
-}
-
-@keyframes quote-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-}
-
-.quote-list {
-  grid-column: 10 / span 3;
-  grid-row: 1;
+.tcard figcaption {
   display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--line);
+  align-items: center;
+  gap: 14px;
 }
 
-.quote-tab {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 14px 0 14px 16px;
-  border: 0;
-  border-bottom: 1px solid var(--line);
-  border-left: 2px solid transparent;
-  background: none;
-  color: var(--muted);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: color 0.3s, border-color 0.3s;
-}
-
-.quote-tab:hover {
-  color: var(--ink);
-}
-
-.quote-tab[aria-selected="true"] {
-  color: var(--ink);
-  border-left-color: var(--accent);
-}
-
-.quote-name {
-  font-weight: 500;
-}
-
-.quote-role {
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
   font-size: 15px;
-  color: var(--muted);
+  font-weight: 600;
 }
 
-/* Upwork: one quiet band that links to the profile. The mark is Upwork's
-   own (Simple Icons, CC0) in its brand green on an ink disc. */
+.t-name {
+  display: block;
+  font-weight: 500;
+}
+
+.t-role {
+  display: block;
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.slider-progress {
+  height: 2px;
+  margin-top: 28px;
+  background: var(--line);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.slider-progress span {
+  display: block;
+  height: 100%;
+  width: var(--progress, 25%);
+  background: var(--ink);
+  transition: width 0.5s var(--ease-out);
+}
+
+/* Upwork: a small profile card linking to the profile. The mark is
+   Upwork's own (Simple Icons, CC0) in its brand green on an ink disc. */
 
 .upwork {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 16px 24px;
+  display: block;
   padding: clamp(20px, 2.4vw, 28px) clamp(20px, 3vw, 32px);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -644,6 +709,13 @@ a {
 .upwork:hover {
   background: var(--card);
   border-color: var(--card);
+}
+
+.upwork-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px 20px;
 }
 
 .upwork-logo {
@@ -718,6 +790,28 @@ a {
   color: var(--bg);
 }
 
+.upwork-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 24px;
+  margin: 24px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.upwork-stats dt {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.upwork-stats dd {
+  margin: 0;
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
 /* About teaser and page */
 
 .statement {
@@ -758,21 +852,94 @@ a {
 }
 
 .services li {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 5fr 2fr 5fr;
   align-items: baseline;
-  gap: 4px 16px;
-  padding: 22px 0;
+  gap: 8px 24px;
+  padding: 28px 0;
   border-bottom: 1px solid var(--line);
-  font-size: clamp(22px, 2.2vw, 30px);
-  letter-spacing: -0.02em;
 }
 
-.services li span {
-  color: var(--muted);
+.services h3 {
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.service-tag {
   font-size: 15px;
-  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.services p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.about-intro {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  margin-top: clamp(40px, 6vw, 80px);
+}
+
+.about-lede {
+  grid-column: 1 / span 6;
+  font-size: clamp(24px, 2.4vw, 34px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  margin: 0;
+}
+
+.about-body {
+  grid-column: 8 / span 5;
+  color: var(--muted);
+}
+
+.about-body p {
+  margin: 0 0 1em;
+}
+
+.process {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.process li {
+  padding-top: 20px;
+  border-top: 1px solid var(--ink);
+}
+
+.process-step {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.process h3 {
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 24px 0 8px;
+}
+
+.process p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
 }
 
 /* Buttons */
@@ -791,6 +958,17 @@ a {
 .btn:hover {
   background: var(--ink);
   color: var(--bg);
+}
+
+.btn-solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-solid:hover {
+  background: var(--ink);
+  border-color: var(--ink);
 }
 
 /* Footer / contact */
@@ -1109,6 +1287,14 @@ html[data-vt="back"]::view-transition-new(root) {
   }
 }
 
+/* Pages reached through a view transition skip the heading entrances, so
+   nothing moves again after the sheet has landed. */
+.vt-arrive .hero-title,
+.vt-arrive .display .line > span,
+.vt-arrive .spec {
+  transition: none;
+}
+
 /* Responsive */
 
 @media (max-width: 860px) {
@@ -1127,36 +1313,21 @@ html[data-vt="back"]::view-transition-new(root) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .quote,
-  .quote-list {
+  .about-lede,
+  .about-body {
     grid-column: 1 / -1;
   }
 
-  .quote {
-    grid-row: 2;
+  .process,
+  .upwork-stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .quote-list {
-    order: -1;
-    flex-direction: row;
-    overflow-x: auto;
-    border-top: 0;
-    border-bottom: 1px solid var(--line);
+  .services li {
+    grid-template-columns: 1fr;
   }
 
-  .quote-tab {
-    flex: 0 0 auto;
-    padding: 10px 16px 12px 0;
-    margin-right: 16px;
-    border: 0;
-    border-bottom: 2px solid transparent;
-  }
-
-  .quote-tab[aria-selected="true"] {
-    border-bottom-color: var(--accent);
-  }
-
-  .upwork {
+  .upwork-head {
     grid-template-columns: auto 1fr;
   }
 

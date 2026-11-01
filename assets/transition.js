@@ -63,11 +63,14 @@
     const here = location.pathname;
     const root = document.documentElement;
     if (from && depth(here) < depth(from)) root.dataset.vt = "back";
+    // The sheet animation is the entrance: show headings in place at once.
+    root.classList.add("is-ready", "vt-arrive");
     if (isProject(here) && isHome(from)) pair(coverOf(here));
     else if (isHome(here) && isProject(from)) pair(coverOf(from));
     event.viewTransition.finished.finally(() => {
       unpair();
       delete root.dataset.vt;
+      root.classList.remove("vt-arrive");
     });
   });
 })();
